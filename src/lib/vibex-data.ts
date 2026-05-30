@@ -1,4 +1,4 @@
-import { VibexUser, FlashPrediction, VibeBattle, FeedPost, SpinReward, LeaderboardEntry, Transaction, CameraFilter, FilterOverlay, FilterPost } from "./vibex-types";
+import { VibexUser, FlashPrediction, VibeBattle, FeedPost, SpinReward, LeaderboardEntry, Transaction, CameraFilter, FilterOverlay, FilterPost, Reel } from "./vibex-types";
 
 const AVATARS = [
   "🦁", "🐯", "🦊", "🐺", "🦅", "🐉", "🦈", "🐆",
@@ -305,6 +305,97 @@ export const MOCK_FILTER_POSTS: FilterPost[] = [
     mediaType: "photo", caption: "Havana vibes all day ✨",
     reactions: { fire: 189, skull: 5, rocket: 67, clap: 98 },
     createdAt: "2026-05-29T22:00:00Z",
+  },
+];
+
+export const MOCK_REELS: Reel[] = [
+  {
+    id: "r1", user: MOCK_USERS[0], mediaType: "video",
+    caption: "Lagos drip check with the new filter 🔥🇳🇬 #lagosdrip #vibes",
+    songTitle: "Calm Down", songArtist: "Rema",
+    filterId: "cf1", filterName: "Lagos Drip 🇳🇬", filterCreator: "blazeking",
+    thumbnail: "🔥", duration: "0:15",
+    views: 45200, reactions: { fire: 1230, skull: 45, rocket: 890, clap: 567 },
+    comments: 234, shares: 189, createdAt: "2026-05-30T10:00:00Z",
+  },
+  {
+    id: "r2", user: MOCK_USERS[2], mediaType: "video",
+    caption: "My Calm Down dance 💃 using the viral filter",
+    songTitle: "Calm Down", songArtist: "Rema",
+    filterId: "vf1", filterName: "Calm Down Dance", filterCreator: "blazeking",
+    thumbnail: "💃", duration: "0:22",
+    views: 89400, reactions: { fire: 3450, skull: 120, rocket: 2100, clap: 1890 },
+    comments: 567, shares: 412, createdAt: "2026-05-30T08:30:00Z",
+  },
+  {
+    id: "r3", user: MOCK_USERS[7], mediaType: "video",
+    caption: "Havana nights filter is everything ✨ #cuba #vibes",
+    songTitle: "Ojitos Lindos", songArtist: "Bad Bunny",
+    filterId: "cf2", filterName: "Havana Nights ✨", filterCreator: "cubanflash",
+    thumbnail: "✨", duration: "0:18",
+    views: 34500, reactions: { fire: 890, skull: 23, rocket: 456, clap: 678 },
+    comments: 145, shares: 98, createdAt: "2026-05-30T07:00:00Z",
+  },
+  {
+    id: "r4", user: MOCK_USERS[1], mediaType: "video",
+    caption: "Ojitos Challenge accepted 👀 #badbunny #latin",
+    songTitle: "Ojitos Lindos", songArtist: "Bad Bunny",
+    filterId: "vf2", filterName: "Ojitos Challenge", filterCreator: "viperqueen",
+    thumbnail: "🎵", duration: "0:25",
+    views: 67800, reactions: { fire: 2340, skull: 89, rocket: 1560, clap: 1230 },
+    comments: 389, shares: 278, createdAt: "2026-05-29T22:00:00Z",
+  },
+  {
+    id: "r5", user: MOCK_USERS[4], mediaType: "video",
+    caption: "Last Last vibes hit different 🔥 Burna Boy forever",
+    songTitle: "Last Last", songArtist: "Burna Boy",
+    filterId: "vf3", filterName: "Last Last Vibes", filterCreator: "lagosphantom",
+    thumbnail: "🎶", duration: "0:20",
+    views: 52100, reactions: { fire: 1890, skull: 67, rocket: 1230, clap: 945 },
+    comments: 278, shares: 198, createdAt: "2026-05-29T20:00:00Z",
+  },
+  {
+    id: "r6", user: MOCK_USERS[5], mediaType: "video",
+    caption: "Manila Glow filter on point 🌊 #philippines #glow",
+    filterId: "cf3", filterName: "Manila Glow 🌊", filterCreator: "manilawave",
+    thumbnail: "🌊", duration: "0:12",
+    views: 28900, reactions: { fire: 780, skull: 15, rocket: 345, clap: 456 },
+    comments: 112, shares: 67, createdAt: "2026-05-29T18:00:00Z",
+  },
+  {
+    id: "r7", user: MOCK_USERS[6], mediaType: "image",
+    caption: "Beast mode activated 🐆💪 Bogotá filter goes hard",
+    filterId: "cf4", filterName: "Bogotá Beast Mode 🐆", filterCreator: "bogotabeast",
+    thumbnail: "🐆", views: 19400,
+    reactions: { fire: 560, skull: 34, rocket: 234, clap: 345 },
+    comments: 89, shares: 45, createdAt: "2026-05-29T16:00:00Z",
+  },
+  {
+    id: "r8", user: MOCK_USERS[3], mediaType: "video",
+    caption: "20-day streak celebration 🔥 Crown filter only for legends",
+    songTitle: "Pepas", songArtist: "Farruko",
+    filterId: "cf2", filterName: "Havana Nights ✨", filterCreator: "cubanflash",
+    thumbnail: "👑", duration: "0:30",
+    views: 41200, reactions: { fire: 1560, skull: 56, rocket: 890, clap: 1120 },
+    comments: 198, shares: 156, createdAt: "2026-05-29T14:00:00Z",
+  },
+  {
+    id: "r9", user: MOCK_USERS[0], mediaType: "video",
+    caption: "Won 2400 coins on Bitcoin prediction! 🚀 Celebrating with this fire filter",
+    songTitle: "Essence", songArtist: "Wizkid ft Tems",
+    filterId: "cf1", filterName: "Lagos Drip 🇳🇬", filterCreator: "blazeking",
+    thumbnail: "💰", duration: "0:14",
+    views: 38700, reactions: { fire: 1340, skull: 78, rocket: 890, clap: 567 },
+    comments: 167, shares: 123, createdAt: "2026-05-29T12:00:00Z",
+  },
+  {
+    id: "r10", user: MOCK_USERS[5], mediaType: "video",
+    caption: "SOS vibes with the Manila Glow ✨ this filter is everything",
+    songTitle: "SOS", songArtist: "SZA",
+    filterId: "cf3", filterName: "Manila Glow 🌊", filterCreator: "manilawave",
+    thumbnail: "🌟", duration: "0:19",
+    views: 31500, reactions: { fire: 920, skull: 28, rocket: 567, clap: 678 },
+    comments: 134, shares: 89, createdAt: "2026-05-29T10:00:00Z",
   },
 ];
 

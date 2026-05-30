@@ -60,12 +60,38 @@ export interface VibeBattle {
 export interface FeedPost {
   id: string;
   user: VibexUser;
-  type: "prediction_win" | "battle_result" | "streak" | "achievement" | "challenge";
+  type: "prediction_win" | "battle_result" | "streak" | "achievement" | "challenge" | "media_post";
   content: string;
   coins?: number;
   timestamp: string;
   reactions: { fire: number; skull: number; rocket: number; clap: number };
   comments: number;
+  media?: {
+    type: "image" | "video";
+    url: string;
+    thumbnail?: string;
+  };
+  filterId?: string;
+  filterName?: string;
+}
+
+export interface Reel {
+  id: string;
+  user: VibexUser;
+  mediaType: "video" | "image";
+  caption: string;
+  songTitle?: string;
+  songArtist?: string;
+  filterId?: string;
+  filterName?: string;
+  filterCreator?: string;
+  thumbnail: string;
+  duration?: string;
+  views: number;
+  reactions: { fire: number; skull: number; rocket: number; clap: number };
+  comments: number;
+  shares: number;
+  createdAt: string;
 }
 
 export interface SpinReward {

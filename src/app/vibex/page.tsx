@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { VibexHeader } from "@/components/vibex/VibexHeader";
 import { useVibex } from "@/lib/vibex-context";
-import { FEED_POSTS, FLASH_PREDICTIONS } from "@/lib/vibex-data";
+import { FEED_POSTS, FLASH_PREDICTIONS, MOCK_REELS } from "@/lib/vibex-data";
 import type { FeedPost, FlashPrediction } from "@/lib/vibex-types";
-import { Flame, Zap, Swords, TrendingUp, Clock, Users, ChevronRight } from "lucide-react";
+import { Flame, Zap, Swords, TrendingUp, Clock, ChevronRight, Play, Camera, Eye, Users } from "lucide-react";
 import Link from "next/link";
 
 function FlashCard({ prediction }: { prediction: FlashPrediction }) {
@@ -115,6 +115,7 @@ function PostCard({ post }: { post: FeedPost }) {
     streak: "from-orange-500/20 to-amber-500/20 border-orange-500/30",
     achievement: "from-purple-500/20 to-violet-500/20 border-purple-500/30",
     challenge: "from-cyan-500/20 to-blue-500/20 border-cyan-500/30",
+    media_post: "from-pink-500/20 to-rose-500/20 border-pink-500/30",
   };
 
   const typeLabels = {
@@ -123,6 +124,7 @@ function PostCard({ post }: { post: FeedPost }) {
     streak: "Streak",
     achievement: "Level Up",
     challenge: "Open Challenge",
+    media_post: "Post",
   };
 
   return (
@@ -263,6 +265,53 @@ export default function VibexHomePage() {
             <span className="text-xs font-semibold">Daily Spin</span>
           </Link>
         </div>
+
+        {/* Trending Reels */}
+        <section>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Play size={18} className="text-[#ff00e5]" />
+              <h2 className="text-lg font-bold">Trending Reels</h2>
+            </div>
+            <Link href="/vibex/reels" className="flex items-center gap-1 text-xs text-[#ff00e5] hover:underline">
+              Watch all <ChevronRight size={14} />
+            </Link>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: "none" }}>
+            {MOCK_REELS.slice(0, 5).map((reel) => (
+              <Link
+                key={reel.id}
+                href="/vibex/reels"
+                className="flex-shrink-0 w-32 rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent overflow-hidden hover:border-[#ff00e5]/30 transition-all"
+              >
+                <div className="relative h-44 bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-cyan-900/20 flex items-center justify-center">
+                  <span className="text-4xl">{reel.thumbnail}</span>
+                  {reel.mediaType === "video" && (
+                    <div className="absolute top-1.5 right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/50">
+                      <Play size={10} className="text-white ml-0.5" />
+                    </div>
+                  )}
+                  <div className="absolute bottom-1.5 left-1.5 flex items-center gap-1 rounded-full bg-black/50 px-1.5 py-0.5">
+                    <Eye size={8} className="text-white/60" />
+                    <span className="text-[8px] text-white/80">{(reel.views / 1000).toFixed(0)}K</span>
+                  </div>
+                  {reel.filterName && (
+                    <div className="absolute bottom-1.5 right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#ff00e5]/30">
+                      <Camera size={8} className="text-[#ff00e5]" />
+                    </div>
+                  )}
+                </div>
+                <div className="p-2">
+                  <div className="flex items-center gap-1">
+                    <span className="text-sm">{reel.user.avatar}</span>
+                    <span className="text-[10px] font-bold truncate">@{reel.user.username}</span>
+                  </div>
+                  <p className="text-[9px] text-zinc-500 truncate mt-0.5">{reel.caption}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* Feed */}
         <section>
