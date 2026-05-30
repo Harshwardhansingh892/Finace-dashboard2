@@ -2,8 +2,8 @@
 
 import { use } from "react";
 import { VibexHeader } from "@/components/vibex/VibexHeader";
-import { MOCK_FILTERS, MOCK_FILTER_POSTS } from "@/lib/vibex-data";
-import { Camera, Video, Download, Users, Image, TrendingUp, ArrowLeft, BarChart2 } from "lucide-react";
+import { MOCK_FILTERS, MOCK_FILTER_POSTS, MOCK_REELS } from "@/lib/vibex-data";
+import { Camera, Video, Download, Users, Image, TrendingUp, ArrowLeft, BarChart2, Play, Eye } from "lucide-react";
 import Link from "next/link";
 
 export default function FilterDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -23,6 +23,7 @@ export default function FilterDetailPage({ params }: { params: Promise<{ id: str
   }
 
   const relatedPosts = MOCK_FILTER_POSTS.filter((p) => p.filter.id === filter.id);
+  const relatedReels = MOCK_REELS.filter((r) => r.filterId === filter.id);
 
   return (
     <>
@@ -139,6 +140,48 @@ export default function FilterDetailPage({ params }: { params: Promise<{ id: str
             ))}
           </div>
         </div>
+
+        {/* Reels using this filter */}
+        {relatedReels.length > 0 && (
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
+                <Play size={12} />
+                Reels Using This Filter
+              </h3>
+              <Link href="/vibex/reels" className="text-[10px] text-[#ff00e5] hover:underline">See all</Link>
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: "none" }}>
+              {relatedReels.map((reel) => (
+                <Link
+                  key={reel.id}
+                  href="/vibex/reels"
+                  className="flex-shrink-0 w-28 rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden hover:border-[#ff00e5]/30 transition-all"
+                >
+                  <div className="relative h-36 bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-cyan-900/20 flex items-center justify-center">
+                    <span className="text-3xl">{reel.thumbnail}</span>
+                    {reel.mediaType === "video" && (
+                      <div className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-black/50">
+                        <Play size={8} className="text-white ml-0.5" />
+                      </div>
+                    )}
+                    <div className="absolute bottom-1 left-1 flex items-center gap-0.5 rounded-full bg-black/50 px-1 py-0.5">
+                      <Eye size={7} className="text-white/60" />
+                      <span className="text-[7px] text-white/80">{(reel.views / 1000).toFixed(0)}K</span>
+                    </div>
+                  </div>
+                  <div className="p-1.5">
+                    <div className="flex items-center gap-1">
+                      <span className="text-xs">{reel.user.avatar}</span>
+                      <span className="text-[9px] font-bold truncate">@{reel.user.username}</span>
+                    </div>
+                    <p className="text-[8px] text-zinc-500 truncate">{reel.caption}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Posts using this filter */}
         {relatedPosts.length > 0 && (

@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Flame, Swords, Camera, Trophy, User } from "lucide-react";
+import { Flame, Swords, Play, Camera, User } from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/vibex", icon: Flame, label: "Feed" },
   { href: "/vibex/arena", icon: Swords, label: "Arena" },
+  { href: "/vibex/reels", icon: Play, label: "Reels" },
   { href: "/vibex/filters", icon: Camera, label: "Filters" },
-  { href: "/vibex/leaderboard", icon: Trophy, label: "Ranks" },
   { href: "/vibex/profile", icon: User, label: "Me" },
 ];
 
