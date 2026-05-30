@@ -87,3 +87,30 @@ body {
 .pulse-glow {
   box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
 }
+
+/* VibeX App Styles */
+.vibex-app {
+  background: radial-gradient(ellipse at top, #0d0d1a 0%, #0a0a0f 50%);
+}
+
+.vibex-app .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes vibex-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.3); }
+}
+
+@keyframes vibex-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.vibex-glow {
+  animation: vibex-glow 2s ease-in-out infinite;
+}
+
+.vibex-float {
+  animation: vibex-float 3s ease-in-out infinite;
+}
