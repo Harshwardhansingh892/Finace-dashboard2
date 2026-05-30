@@ -4,7 +4,7 @@ import { useVibex } from "@/lib/vibex-context";
 import { CoinBadge } from "./CoinBadge";
 import { StreakBadge } from "./StreakBadge";
 import Link from "next/link";
-import { LogIn } from "lucide-react";
+import { LogIn, MessageCircle, Users } from "lucide-react";
 
 export function VibexHeader() {
   const { user, isLoggedIn } = useVibex();
@@ -24,6 +24,13 @@ export function VibexHeader() {
           <>
             <StreakBadge />
             <CoinBadge />
+            <Link href="/vibex/friends" className="flex h-7 w-7 items-center justify-center rounded-full bg-white/5 text-zinc-400 hover:text-[#7b61ff] hover:bg-[#7b61ff]/10 transition-all">
+              <Users size={14} />
+            </Link>
+            <Link href="/vibex/messages" className="relative flex h-7 w-7 items-center justify-center rounded-full bg-white/5 text-zinc-400 hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 transition-all">
+              <MessageCircle size={14} />
+              <span className="absolute -top-0.5 -right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-[#ff00e5] px-0.5 text-[8px] font-bold text-white">3</span>
+            </Link>
             <Link href="/vibex/profile" className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#7b61ff] to-[#00f0ff] text-lg">
               {user?.avatar}
             </Link>

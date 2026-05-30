@@ -3,7 +3,8 @@
 import { VibexHeader } from "@/components/vibex/VibexHeader";
 import { useVibex } from "@/lib/vibex-context";
 import { COUNTRY_INFO } from "@/lib/vibex-types";
-import { Trophy, Flame, Target, Swords, Coins, Calendar, LogOut } from "lucide-react";
+import { useState } from "react";
+import { Trophy, Flame, Target, Swords, Coins, Calendar, LogOut, Shield, Globe, Users, MessageCircle, Edit2, Check } from "lucide-react";
 import Link from "next/link";
 
 const ACHIEVEMENT_TIERS = [
@@ -15,7 +16,9 @@ const ACHIEVEMENT_TIERS = [
 ];
 
 export default function ProfilePage() {
-  const { user, isLoggedIn, logout } = useVibex();
+  const { user, isLoggedIn, logout, social, togglePrivacy, updateBio } = useVibex();
+  const [editingBio, setEditingBio] = useState(false);
+  const [bioInput, setBioInput] = useState("");
 
   if (!isLoggedIn || !user) {
     return (
@@ -53,6 +56,11 @@ export default function ProfilePage() {
                 <span>{COUNTRY_INFO[user.country].flag}</span>
               </div>
               <p className="text-sm text-zinc-500">@{user.username}</p>
+              <div className="flex items-center gap-3 mt-1 text-[10px] text-zinc-500">
+                <span className="flex items-center gap-0.5"><Users size={9} /> {social.friends.length} friends</span>
+                <span>{social.following.length} following</span>
+                <span>{social.followers.length} followers</span>
+              </div>
               <div className="mt-2 flex items-center gap-2">
                 <span className={`flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-bold ${tier.color}`}>
                   {tier.icon} {tier.name}
@@ -147,8 +155,68 @@ export default function ProfilePage() {
           )}
         </div>
 
+        {/* Bio */}
+        <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm font-bold text-zinc-400">Bio</h3>
+            {editingBio ? (
+              <button onClick={() => { updateBio(bioInput); setEditingBio(false); }} className="flex items-center gap-1 text-[10px] text-[#00f0ff]">
+                <Check size={10} /> Save
+              </button>
+            ) : (
+              <button onClick={() => { setBioInput(social.bio); setEditingBio(true); }} className="flex items-center gap-1 text-[10px] text-zinc-500">
+                <Edit2 size={10} /> Edit
+              </button>
+            )}
+          </div>
+          {editingBio ? (
+            <textarea
+              value={bioInput}
+              onChange={(e) => setBioInput(e.target.value.slice(0, 150))}
+              rows={2}
+              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-zinc-600 focus:border-[#00f0ff]/50 focus:outline-none resize-none"
+              placeholder="Tell people about yourself..."
+            />
+          ) : (
+            <p className="text-xs text-zinc-400">{social.bio || "No bio yet — tap Edit to add one"}</p>
+          )}
+        </div>
+
+        {/* Privacy */}
+        <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {social.isPublic ? <Globe size={16} className="text-green-400" /> : <Shield size={16} className="text-yellow-400" />}
+              <div>
+                <h3 className="text-sm font-bold">{social.isPublic ? "Public" : "Private"} Account</h3>
+                <p className="text-[10px] text-zinc-500">
+                  {social.isPublic ? "Anyone can see your posts and activity" : "Only friends can see your posts"}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={togglePrivacy}
+              className={`relative h-6 w-11 rounded-full transition-all ${
+                social.isPublic ? "bg-green-500" : "bg-zinc-700"
+              }`}
+            >
+              <div className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${
+                social.isPublic ? "left-[22px]" : "left-0.5"
+              }`} />
+            </button>
+          </div>
+        </div>
+
         {/* Quick links */}
         <div className="space-y-2">
+          <Link href="/vibex/messages" className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:bg-white/[0.04] transition-all">
+            <MessageCircle size={18} className="text-[#00f0ff]" />
+            <span className="text-sm font-medium">Messages</span>
+          </Link>
+          <Link href="/vibex/friends" className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:bg-white/[0.04] transition-all">
+            <Users size={18} className="text-[#7b61ff]" />
+            <span className="text-sm font-medium">Friends & Following</span>
+          </Link>
           <Link href="/vibex/wallet" className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:bg-white/[0.04] transition-all">
             <Coins size={18} className="text-yellow-400" />
             <span className="text-sm font-medium">Wallet & Transactions</span>
