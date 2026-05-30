@@ -1,4 +1,4 @@
-import { VibexUser, FlashPrediction, VibeBattle, FeedPost, SpinReward, LeaderboardEntry, Transaction } from "./vibex-types";
+import { VibexUser, FlashPrediction, VibeBattle, FeedPost, SpinReward, LeaderboardEntry, Transaction, CameraFilter, FilterOverlay, FilterPost } from "./vibex-types";
 
 const AVATARS = [
   "🦁", "🐯", "🦊", "🐺", "🦅", "🐉", "🦈", "🐆",
@@ -208,5 +208,104 @@ export function getMockTransactions(): Transaction[] {
     { id: "t8", type: "signup_bonus", amount: 5000, description: "Welcome bonus! 🎉", timestamp: "2026-05-20T00:00:00Z" },
   ];
 }
+
+export const FILTER_OVERLAYS: FilterOverlay[] = [
+  { id: "ov1", kind: "mustache", emoji: "🥸", label: "Classic Stache", position: { x: 50, y: 65 }, scale: 1, rotation: 0 },
+  { id: "ov2", kind: "glasses", emoji: "🕶️", label: "Cool Shades", position: { x: 50, y: 45 }, scale: 1, rotation: 0 },
+  { id: "ov3", kind: "hat", emoji: "🎩", label: "Top Hat", position: { x: 50, y: 15 }, scale: 1.2, rotation: 0 },
+  { id: "ov4", kind: "crown", emoji: "👑", label: "Crown", position: { x: 50, y: 10 }, scale: 1.1, rotation: 0 },
+  { id: "ov5", kind: "ears", emoji: "🐱", label: "Cat Ears", position: { x: 50, y: 8 }, scale: 1, rotation: 0 },
+  { id: "ov6", kind: "facepaint", emoji: "🎨", label: "Face Paint", position: { x: 50, y: 50 }, scale: 1.5, rotation: 0 },
+  { id: "ov7", kind: "mask", emoji: "🦊", label: "Fox Mask", position: { x: 50, y: 40 }, scale: 1.3, rotation: 0 },
+  { id: "ov8", kind: "text", emoji: "💬", label: "Caption", position: { x: 50, y: 85 }, scale: 1, rotation: 0 },
+  { id: "ov9", kind: "sticker", emoji: "⭐", label: "Star Sparkle", position: { x: 30, y: 25 }, scale: 0.8, rotation: 15 },
+  { id: "ov10", kind: "frame", emoji: "🖼️", label: "Neon Frame", position: { x: 50, y: 50 }, scale: 1, rotation: 0 },
+  { id: "ov11", kind: "hat", emoji: "🧢", label: "Snapback", position: { x: 50, y: 12 }, scale: 1.1, rotation: -10 },
+  { id: "ov12", kind: "glasses", emoji: "👓", label: "Nerdy Glasses", position: { x: 50, y: 45 }, scale: 1, rotation: 0 },
+  { id: "ov13", kind: "mustache", emoji: "🧔", label: "Full Beard", position: { x: 50, y: 70 }, scale: 1.2, rotation: 0 },
+  { id: "ov14", kind: "sticker", emoji: "🔥", label: "Fire Effect", position: { x: 70, y: 30 }, scale: 0.9, rotation: 0 },
+  { id: "ov15", kind: "sticker", emoji: "💎", label: "Diamond Bling", position: { x: 50, y: 35 }, scale: 0.7, rotation: 0 },
+  { id: "ov16", kind: "ears", emoji: "🐰", label: "Bunny Ears", position: { x: 50, y: 5 }, scale: 1.1, rotation: 0 },
+];
+
+export const TRENDING_SONGS = [
+  { id: "song1", title: "Unholy", artist: "Sam Smith", duration: "3:36", bpm: 131 },
+  { id: "song2", title: "Calm Down", artist: "Rema", duration: "3:59", bpm: 107 },
+  { id: "song3", title: "Flowers", artist: "Miley Cyrus", duration: "3:20", bpm: 118 },
+  { id: "song4", title: "Ojitos Lindos", artist: "Bad Bunny", duration: "4:18", bpm: 92 },
+  { id: "song5", title: "Last Last", artist: "Burna Boy", duration: "3:27", bpm: 107 },
+  { id: "song6", title: "Essence", artist: "Wizkid ft Tems", duration: "4:09", bpm: 107 },
+  { id: "song7", title: "Pepas", artist: "Farruko", duration: "4:46", bpm: 130 },
+  { id: "song8", title: "SOS", artist: "SZA", duration: "4:10", bpm: 98 },
+];
+
+export const MOCK_FILTERS: CameraFilter[] = [
+  {
+    id: "cf1", name: "Lagos Drip 🇳🇬", creator: MOCK_USERS[0], type: "camera",
+    thumbnail: "🔥", overlays: [FILTER_OVERLAYS[1], FILTER_OVERLAYS[3], FILTER_OVERLAYS[14]],
+    downloads: 12400, uses: 8900, posts: 3200,
+    createdAt: "2026-05-25T10:00:00Z", tags: ["drip", "nigeria", "cool"], status: "published",
+  },
+  {
+    id: "cf2", name: "Havana Nights ✨", creator: MOCK_USERS[3], type: "camera",
+    thumbnail: "💎", overlays: [FILTER_OVERLAYS[2], FILTER_OVERLAYS[5], FILTER_OVERLAYS[9]],
+    downloads: 9800, uses: 6500, posts: 2100,
+    createdAt: "2026-05-22T14:00:00Z", tags: ["havana", "cuban", "vibes"], status: "published",
+  },
+  {
+    id: "cf3", name: "Manila Glow 🌊", creator: MOCK_USERS[5], type: "camera",
+    thumbnail: "🌊", overlays: [FILTER_OVERLAYS[4], FILTER_OVERLAYS[8], FILTER_OVERLAYS[11]],
+    downloads: 7200, uses: 4800, posts: 1600,
+    createdAt: "2026-05-20T08:00:00Z", tags: ["manila", "glow", "cute"], status: "published",
+  },
+  {
+    id: "cf4", name: "Bogotá Beast Mode 🐆", creator: MOCK_USERS[6], type: "camera",
+    thumbnail: "🐆", overlays: [FILTER_OVERLAYS[0], FILTER_OVERLAYS[1], FILTER_OVERLAYS[13]],
+    downloads: 5400, uses: 3200, posts: 980,
+    createdAt: "2026-05-18T16:00:00Z", tags: ["bogota", "beast", "fire"], status: "published",
+  },
+  {
+    id: "vf1", name: "Calm Down Dance", creator: MOCK_USERS[0], type: "video",
+    thumbnail: "💃", overlays: [FILTER_OVERLAYS[9], FILTER_OVERLAYS[14]],
+    songId: "song2", songTitle: "Calm Down", songArtist: "Rema",
+    downloads: 18500, uses: 14200, posts: 6800,
+    createdAt: "2026-05-26T12:00:00Z", tags: ["dance", "rema", "afrobeats"], status: "published",
+  },
+  {
+    id: "vf2", name: "Ojitos Challenge", creator: MOCK_USERS[1], type: "video",
+    thumbnail: "🎵", overlays: [FILTER_OVERLAYS[3], FILTER_OVERLAYS[8]],
+    songId: "song4", songTitle: "Ojitos Lindos", songArtist: "Bad Bunny",
+    downloads: 15200, uses: 11800, posts: 5400,
+    createdAt: "2026-05-24T18:00:00Z", tags: ["badbunny", "latin", "challenge"], status: "published",
+  },
+  {
+    id: "vf3", name: "Last Last Vibes", creator: MOCK_USERS[4], type: "video",
+    thumbnail: "🔥", overlays: [FILTER_OVERLAYS[13], FILTER_OVERLAYS[7]],
+    songId: "song5", songTitle: "Last Last", songArtist: "Burna Boy",
+    downloads: 11300, uses: 8400, posts: 3900,
+    createdAt: "2026-05-23T09:00:00Z", tags: ["burnaboy", "afrobeats", "vibes"], status: "published",
+  },
+];
+
+export const MOCK_FILTER_POSTS: FilterPost[] = [
+  {
+    id: "fp_1", user: MOCK_USERS[4], filter: MOCK_FILTERS[0],
+    mediaType: "photo", caption: "Lagos drip different 🔥🇳🇬",
+    reactions: { fire: 234, skull: 12, rocket: 89, clap: 156 },
+    createdAt: "2026-05-30T08:00:00Z",
+  },
+  {
+    id: "fp_2", user: MOCK_USERS[2], filter: MOCK_FILTERS[4],
+    mediaType: "video", caption: "My Calm Down dance 💃",
+    reactions: { fire: 456, skull: 23, rocket: 178, clap: 312 },
+    createdAt: "2026-05-30T06:00:00Z",
+  },
+  {
+    id: "fp_3", user: MOCK_USERS[7], filter: MOCK_FILTERS[1],
+    mediaType: "photo", caption: "Havana vibes all day ✨",
+    reactions: { fire: 189, skull: 5, rocket: 67, clap: 98 },
+    createdAt: "2026-05-29T22:00:00Z",
+  },
+];
 
 export { AVATARS };

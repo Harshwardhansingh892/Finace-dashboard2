@@ -91,6 +91,44 @@ export interface Transaction {
   timestamp: string;
 }
 
+export interface CameraFilter {
+  id: string;
+  name: string;
+  creator: VibexUser;
+  type: "camera" | "video";
+  thumbnail: string;
+  overlays: FilterOverlay[];
+  songId?: string;
+  songTitle?: string;
+  songArtist?: string;
+  downloads: number;
+  uses: number;
+  posts: number;
+  createdAt: string;
+  tags: string[];
+  status: "draft" | "published";
+}
+
+export interface FilterOverlay {
+  id: string;
+  kind: "mustache" | "glasses" | "hat" | "facepaint" | "ears" | "crown" | "mask" | "text" | "sticker" | "frame";
+  emoji: string;
+  label: string;
+  position: { x: number; y: number };
+  scale: number;
+  rotation: number;
+}
+
+export interface FilterPost {
+  id: string;
+  user: VibexUser;
+  filter: CameraFilter;
+  mediaType: "photo" | "video";
+  caption: string;
+  reactions: { fire: number; skull: number; rocket: number; clap: number };
+  createdAt: string;
+}
+
 export type CountryCode = "CU" | "CO" | "NG" | "PH";
 
 export const COUNTRY_INFO: Record<CountryCode, { name: string; flag: string; currency: string }> = {
