@@ -1,4 +1,4 @@
-import { VibexUser, FlashPrediction, VibeBattle, FeedPost, SpinReward, LeaderboardEntry, Transaction, CameraFilter, FilterOverlay, FilterPost, Reel } from "./vibex-types";
+import { VibexUser, FlashPrediction, VibeBattle, FeedPost, SpinReward, LeaderboardEntry, Transaction, CameraFilter, FilterOverlay, FilterPost, Reel, Conversation, Message, FriendRequest, Story } from "./vibex-types";
 
 const AVATARS = [
   "🦁", "🐯", "🦊", "🐺", "🦅", "🐉", "🦈", "🐆",
@@ -396,6 +396,111 @@ export const MOCK_REELS: Reel[] = [
     thumbnail: "🌟", duration: "0:19",
     views: 31500, reactions: { fire: 920, skull: 28, rocket: 567, clap: 678 },
     comments: 134, shares: 89, createdAt: "2026-05-29T10:00:00Z",
+  },
+];
+
+export const MOCK_CONVERSATIONS: Conversation[] = [
+  {
+    id: "conv1", participants: [MOCK_USERS[0], MOCK_USERS[1]],
+    messages: [
+      { id: "m1", senderId: "u2", text: "Yo BlazeKing! That Bitcoin prediction was insane 🚀", timestamp: "2026-05-30T09:00:00Z", read: true },
+      { id: "m2", senderId: "u1", text: "I told you bro! Easy coins 💰", timestamp: "2026-05-30T09:01:00Z", read: true },
+      { id: "m3", senderId: "u2", text: "Wanna battle on the AFCON qualifier?", timestamp: "2026-05-30T09:02:00Z", read: true },
+      { id: "m4", senderId: "u1", text: "Let's go! 500 coins?", timestamp: "2026-05-30T09:03:00Z", read: true },
+      { id: "m5", senderId: "u2", text: "1000. I'm not scared 🐍", timestamp: "2026-05-30T09:05:00Z", read: false },
+    ],
+    lastMessage: { id: "m5", senderId: "u2", text: "1000. I'm not scared 🐍", timestamp: "2026-05-30T09:05:00Z", read: false },
+    unreadCount: 1, updatedAt: "2026-05-30T09:05:00Z",
+  },
+  {
+    id: "conv2", participants: [MOCK_USERS[0], MOCK_USERS[3]],
+    messages: [
+      { id: "m6", senderId: "u4", text: "BlazeKing! Check my new filter ✨", timestamp: "2026-05-30T08:00:00Z", read: true },
+      { id: "m7", senderId: "u4", sharedFilterId: "cf2", text: "Havana Nights filter", timestamp: "2026-05-30T08:01:00Z", read: true },
+      { id: "m8", senderId: "u1", text: "Fire! How many downloads so far?", timestamp: "2026-05-30T08:10:00Z", read: true },
+      { id: "m9", senderId: "u4", text: "Almost 10K! Cuba representin 🇨🇺", timestamp: "2026-05-30T08:12:00Z", read: true },
+    ],
+    lastMessage: { id: "m9", senderId: "u4", text: "Almost 10K! Cuba representin 🇨🇺", timestamp: "2026-05-30T08:12:00Z", read: true },
+    unreadCount: 0, updatedAt: "2026-05-30T08:12:00Z",
+  },
+  {
+    id: "conv3", participants: [MOCK_USERS[0], MOCK_USERS[5]],
+    messages: [
+      { id: "m10", senderId: "u6", text: "You on the leaderboard in Nigeria? I'm climbing in PH 🌊", timestamp: "2026-05-29T20:00:00Z", read: true },
+      { id: "m11", senderId: "u1", text: "Bro I'm top 5 NG right now 🔥", timestamp: "2026-05-29T20:05:00Z", read: true },
+      { id: "m12", senderId: "u6", text: "Respect! Let's collab on a filter", timestamp: "2026-05-29T20:10:00Z", read: false },
+      { id: "m13", senderId: "u6", text: "Something Afrobeats x Manila vibes", timestamp: "2026-05-29T20:11:00Z", read: false },
+    ],
+    lastMessage: { id: "m13", senderId: "u6", text: "Something Afrobeats x Manila vibes", timestamp: "2026-05-29T20:11:00Z", read: false },
+    unreadCount: 2, updatedAt: "2026-05-29T20:11:00Z",
+  },
+  {
+    id: "conv4", participants: [MOCK_USERS[0], MOCK_USERS[4]],
+    messages: [
+      { id: "m14", senderId: "u5", text: "Phantom here 👻 your Lagos Drip filter is legendary", timestamp: "2026-05-29T15:00:00Z", read: true },
+      { id: "m15", senderId: "u1", text: "Thanks fam! More coming soon", timestamp: "2026-05-29T15:30:00Z", read: true },
+    ],
+    lastMessage: { id: "m15", senderId: "u1", text: "Thanks fam! More coming soon", timestamp: "2026-05-29T15:30:00Z", read: true },
+    unreadCount: 0, updatedAt: "2026-05-29T15:30:00Z",
+  },
+];
+
+export const MOCK_FRIEND_REQUESTS: FriendRequest[] = [
+  { id: "fr1", from: MOCK_USERS[2], to: MOCK_USERS[0], status: "pending", createdAt: "2026-05-30T07:00:00Z" },
+  { id: "fr2", from: MOCK_USERS[6], to: MOCK_USERS[0], status: "pending", createdAt: "2026-05-29T22:00:00Z" },
+  { id: "fr3", from: MOCK_USERS[7], to: MOCK_USERS[0], status: "pending", createdAt: "2026-05-29T18:00:00Z" },
+];
+
+export const MOCK_STORIES: Story[] = [
+  {
+    id: "s1", user: MOCK_USERS[1], mediaType: "image",
+    text: "Just hit 31K coins 🐍💰 Who wants a battle?",
+    backgroundColor: "from-purple-600 to-indigo-800",
+    viewers: ["u1", "u3", "u4", "u5"],
+    reactions: { fire: 45, skull: 3, rocket: 12, clap: 23 },
+    createdAt: "2026-05-30T09:00:00Z", expiresAt: "2026-05-31T09:00:00Z",
+  },
+  {
+    id: "s2", user: MOCK_USERS[3], mediaType: "text",
+    text: "20-DAY STREAK \ud83d\udd25\ud83d\udd25\ud83d\udd25 Can't stop won't stop!",
+    backgroundColor: "from-orange-500 to-red-600",
+    viewers: ["u1", "u2", "u5", "u6", "u7"],
+    reactions: { fire: 89, skull: 0, rocket: 34, clap: 56 },
+    createdAt: "2026-05-30T08:00:00Z", expiresAt: "2026-05-31T08:00:00Z",
+  },
+  {
+    id: "s3", user: MOCK_USERS[5], mediaType: "image",
+    text: "Manila Glow filter just hit 7K downloads 🌊✨",
+    backgroundColor: "from-cyan-500 to-blue-600",
+    filterId: "cf3", filterName: "Manila Glow 🌊",
+    viewers: ["u1", "u2"],
+    reactions: { fire: 23, skull: 0, rocket: 15, clap: 18 },
+    createdAt: "2026-05-30T07:30:00Z", expiresAt: "2026-05-31T07:30:00Z",
+  },
+  {
+    id: "s4", user: MOCK_USERS[0], mediaType: "text",
+    text: "Bitcoin prediction hit! +2400 coins \ud83d\ude80\ud83d\udcb0",
+    backgroundColor: "from-green-500 to-emerald-600",
+    viewers: ["u2", "u3", "u4", "u5", "u6", "u7", "u8"],
+    reactions: { fire: 156, skull: 8, rocket: 78, clap: 92 },
+    createdAt: "2026-05-30T09:30:00Z", expiresAt: "2026-05-31T09:30:00Z",
+  },
+  {
+    id: "s5", user: MOCK_USERS[4], mediaType: "text",
+    text: "Nigeria gonna run AFCON 👻🇳🇬 I see the future",
+    backgroundColor: "from-green-700 to-green-900",
+    viewers: ["u1", "u6"],
+    reactions: { fire: 34, skull: 5, rocket: 12, clap: 8 },
+    createdAt: "2026-05-30T06:00:00Z", expiresAt: "2026-05-31T06:00:00Z",
+  },
+  {
+    id: "s6", user: MOCK_USERS[6], mediaType: "text",
+    text: "Bogot\u00e1 Beast Mode filter coming soon \ud83d\udc06\ud83d\udcaa",
+    backgroundColor: "from-yellow-600 to-orange-700",
+    filterId: "cf4", filterName: "Bogot\u00e1 Beast Mode \ud83d\udc06",
+    viewers: ["u1", "u2", "u3"],
+    reactions: { fire: 18, skull: 2, rocket: 9, clap: 11 },
+    createdAt: "2026-05-30T05:00:00Z", expiresAt: "2026-05-31T05:00:00Z",
   },
 ];
 

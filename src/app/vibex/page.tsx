@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { VibexHeader } from "@/components/vibex/VibexHeader";
 import { useVibex } from "@/lib/vibex-context";
-import { FEED_POSTS, FLASH_PREDICTIONS, MOCK_REELS } from "@/lib/vibex-data";
+import { FEED_POSTS, FLASH_PREDICTIONS, MOCK_REELS, MOCK_STORIES } from "@/lib/vibex-data";
 import type { FeedPost, FlashPrediction } from "@/lib/vibex-types";
-import { Flame, Zap, Swords, TrendingUp, Clock, ChevronRight, Play, Camera, Eye, Users } from "lucide-react";
+import { Flame, Zap, Swords, TrendingUp, Clock, ChevronRight, Play, Camera, Eye, Users, Image, Plus } from "lucide-react";
 import Link from "next/link";
 
 function FlashCard({ prediction }: { prediction: FlashPrediction }) {
@@ -221,6 +221,38 @@ export default function VibexHomePage() {
             )}
           </div>
         </div>
+
+        {/* Stories */}
+        <section>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Image size={18} className="text-[#ff00e5]" />
+              <h2 className="text-lg font-bold">Stories</h2>
+            </div>
+            <Link href="/vibex/stories" className="flex items-center gap-1 text-xs text-[#ff00e5] hover:underline">
+              See all <ChevronRight size={14} />
+            </Link>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: "none" }}>
+            <Link href="/vibex/stories" className="flex-shrink-0 flex flex-col items-center gap-1">
+              <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-xl border-2 border-dashed border-[#00f0ff]/50">
+                {user?.avatar || "➕"}
+                <div className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#00f0ff] text-black">
+                  <Plus size={10} strokeWidth={3} />
+                </div>
+              </div>
+              <span className="text-[9px] text-zinc-500">You</span>
+            </Link>
+            {MOCK_STORIES.map((story) => (
+              <Link key={story.id} href="/vibex/stories" className="flex-shrink-0 flex flex-col items-center gap-1">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-xl ring-2 ring-[#ff00e5] ring-offset-1 ring-offset-[#0a0a0f]">
+                  {story.user.avatar}
+                </div>
+                <span className="text-[9px] text-zinc-500">{story.user.username.slice(0, 7)}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* Flash Predictions Carousel */}
         <section>

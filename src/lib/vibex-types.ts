@@ -155,6 +155,62 @@ export interface FilterPost {
   createdAt: string;
 }
 
+export interface Message {
+  id: string;
+  senderId: string;
+  text?: string;
+  mediaUrl?: string;
+  mediaType?: "image" | "video";
+  sharedReelId?: string;
+  sharedPostId?: string;
+  sharedFilterId?: string;
+  timestamp: string;
+  read: boolean;
+}
+
+export interface Conversation {
+  id: string;
+  participants: VibexUser[];
+  messages: Message[];
+  lastMessage?: Message;
+  unreadCount: number;
+  updatedAt: string;
+}
+
+export interface FriendRequest {
+  id: string;
+  from: VibexUser;
+  to: VibexUser;
+  status: "pending" | "accepted" | "rejected";
+  createdAt: string;
+}
+
+export interface Story {
+  id: string;
+  user: VibexUser;
+  mediaType: "image" | "video" | "text";
+  mediaUrl?: string;
+  text?: string;
+  backgroundColor?: string;
+  filterId?: string;
+  filterName?: string;
+  viewers: string[];
+  reactions: { fire: number; skull: number; rocket: number; clap: number };
+  createdAt: string;
+  expiresAt: string;
+}
+
+export interface UserProfile extends VibexUser {
+  bio: string;
+  isPublic: boolean;
+  followers: string[];
+  following: string[];
+  friends: string[];
+  blockedUsers: string[];
+  postCount: number;
+  reelCount: number;
+}
+
 export type CountryCode = "CU" | "CO" | "NG" | "PH";
 
 export const COUNTRY_INFO: Record<CountryCode, { name: string; flag: string; currency: string }> = {
